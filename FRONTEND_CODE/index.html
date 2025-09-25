@@ -29,38 +29,80 @@
     </div>
 
     <nav class="navbar">
-      <div class="nav-container text-lg">
+      <div class="container-big text-lg">
         <ul>
-          <li>Map View</li>
-        
-          <li>Issues</li>
-        
-          <li>Analytics</li>
-       
-          <li class="nav-open">Tickets</li>
+          <li data-target="maps">Map View</li>
+
+          <li data-target="issues">Issues</li>
+
+          <li data-target="analytics">Analytics</li>
+
+          <li data-target="tickets" class="nav-open">Tickets</li>
         </ul>
       </div>
     </nav>
 
-    <section class="ticket-status-boxes">
-      <div class="container">
-        <div class="ticket-status">
-          <p class="text-lg">0</p>
-          <p class="text-md">Unassigned</p>
+    <div class="maps nav-item">
+      <h3 class="text-xxl" >MAP</h3>
+    </div>
+
+    <div class="issues nav-item">ISSUES</div>
+    
+    <div class="analytics nav-item">ANALYTICS</div>
+
+    <!-- The Ticket Page -->
+    <div class="tickets nav-item show">
+      <section class="ticket-status-boxes">
+        <div class="container">
+          <div class="ticket-status">
+            <p class="text-lg">0</p>
+            <p class="text-md">Unassigned</p>
+          </div>
+          <div class="ticket-status">
+            <p class="text-lg">0</p>
+            <p class="text-md">In Progress</p>
+          </div>
+          <div class="ticket-status">
+            <p class="text-lg">0</p>
+            <p class="text-md">Resolved</p>
+          </div>
+          <div class="ticket-status">
+            <p class="text-lg">0</p>
+            <p class="text-md">Verified</p>
+          </div>
         </div>
-        <div class="ticket-status">
-          <p class="text-lg">0</p>
-          <p class="text-md">In Progress</p>
+      </section>
+      
+      <section class="ticket-list">
+        <div class="container-big">
+          <div class="ticket-info">
+            <p class="ticket-header ticket-text text-lg">
+              Large Pothole on Main Street
+            </p>
+            <p class="ticket-text text-md">
+              Deep pothole causing vehicle damage near intersection<br />123
+              Main Street, Downtown<br />Reported Jan 20, 02:00 AM <span class="report color">5 reports</span>
+            </p>
+          </div>
+
+          <div class="ticket-buttons">
+            <button class="btn assign-team">
+              <i class="fas fa-user"></i> Assign team
+            </button>
+            <button class="btn assign-team">
+              <i class="fas fa-comment"></i> Add Notes
+            </button>
+            <button class="btn assign-team">
+              <i class="fas fa-paper-plane"></i> Notify Citizens
+            </button>
+            <button class="btn btn-assign assign-team">
+              <i class="fas fa-check"></i> Mark as Resolved
+            </button>
+          </div>
         </div>
-        <div class="ticket-status">
-          <p class="text-lg">0</p>
-          <p class="text-md">Resolved</p>
-        </div>
-        <div class="ticket-status">
-          <p class="text-lg">0</p>
-          <p class="text-md">Verified</p>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
+
+    <script src="js/app.js"></script>
   </body>
 </html>

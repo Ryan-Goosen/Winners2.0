@@ -1,38 +1,38 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --light-color : #999999;
-    --med-color : #777777;
-    --dark-color : #555555;
+  --light-color : #999999;
+  --med-color : #777777;
+  --dark-color : #555555;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    background: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background: #fff;
 }
 
 p {
-    padding: 5px 5px;
-    line-height: 1;
+  padding: 5px 5px;
+  line-height: 1;
 }
 
 .municipal-header {
-    color: #fff;
-    background: var(--dark-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: #000 solid 2px;
+  color: #fff;
+  background: var(--dark-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: #000 solid 2px;
 }
 
 .municipal-header .municipal-header-title {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .navbar ul {
@@ -52,6 +52,7 @@ p {
   width: 25%;
   margin: 0 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 .navbar ul li.nav-open {
@@ -59,65 +60,123 @@ p {
 }
 
 .ticket-status-boxes .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
 }
 
 .ticket-status-boxes .ticket-status {
-    padding: 20px 0;
-    text-align: center;
-    width: 400px;
-    border-radius: 15px;
-    border: #000 solid 2px;
-    margin: 30px 20px;
+  padding: 20px 0;
+  text-align: center;
+  width: 400px;
+  border-radius: 15px;
+  border: #000 solid 2px;
+  margin: 30px 20px;
 }
 
 .ticket-status-boxes .ticket-status p {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ticket-list .ticket-text {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ticket-list .ticket-info {
+  width: 80%;
+}
+
+.ticket-list .ticket-buttons {
+  padding-right: 5px;
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.ticket-list .container-big {
+  border: #000 solid 2px ;
+  border-radius: 20px;
+  display: flex;
+}
+
+.nav-item {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.container-big {
+  max-width: 4000px;
+  margin: 0 50px;
 }
 
 .container {
-    max-width: 1500px;
-    margin:  0 auto;
-    padding: 0 15px;
-    transition: 0.5s;
+  max-width: 1500px;
+  margin:  0 auto;
+  padding: 0 15px;
+  transition: 0.5s;
+}
+
+.btn {
+  width: 200px;
+  height: 50px;
+  padding: 13px 20px;
+  margin: 5px 0;
+  margin-left: auto;
+  background: #fff;
+  color: var(--med-color);
+  font-weight: 600;
+  text-decoration: none;
+  border: var(--med-color) solid 2px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.btn-assign {
+  color: #fff;
+  background : #90EE90;
 }
 
 .text-xxl {
-    font-size: 3rem;
-    line-height: 1.2;
-    font-weight: normal;
-    margin: 40px 20px;
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: normal;
+  margin: 40px 20px;
 }
 
 .text-xl {
-    font-size: 2.4rem;
-    line-height: 2;
-    font-weight: normal;
-    margin: 40px 20px;
+  font-size: 2.4rem;
+  line-height: 2;
+  font-weight: normal;
+  margin: 40px 20px;
 }
 
 .text-lg {
-    font-size: 1.8rem;
-    line-height: 2;
-    font-weight: normal;
-    margin: 30px 20px;
+  font-size: 1.8rem;
+  line-height: 2;
+  font-weight: normal;
+  margin: 30px 20px;
 }
 
 .text-md {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    font-weight: normal;
-    margin: 25px 20px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: normal;
+  margin: 25px 20px;
     
 }
 
 .text-sm {
-    font-size: 0.6rem;
-    line-height: 1.2;
-    font-weight: normal;
-    margin: 15px 20px;
+  font-size: 0.6rem;
+  line-height: 1.2;
+  font-weight: normal;
+  margin: 15px 20px;
 }
