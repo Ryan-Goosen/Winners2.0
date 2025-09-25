@@ -35,6 +35,29 @@ p {
     margin-bottom: 0px;
 }
 
+.navbar ul {
+  color: #fff;
+  border-radius: 20px;
+  background: var(--dark-color);
+  list-style: none; 
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.navbar ul li {
+  margin: 0 10px;
+  border-radius: 20px;
+  width: 25%;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.navbar ul li.nav-open {
+  background: var(--light-color);
+}
+
 .ticket-status-boxes .container {
     display: flex;
     justify-content: space-between;
