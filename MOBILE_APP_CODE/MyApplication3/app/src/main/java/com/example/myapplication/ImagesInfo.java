@@ -22,9 +22,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ImagesInfo extends AppCompatActivity {
     private ImageView imageView;
-    private ActivityResultLauncher<Intent> cameraLauncher;
-    private ActivityResultLauncher<Intent> galleryLauncher;
-    private ActivityResultLauncher<String> requestPermissionLauncher;
+    private ActivityResultLauncher<Intent> launchCamera;
+    private ActivityResultLauncher<Intent> launchGallery;
+    private ActivityResultLauncher<String> requestPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +35,29 @@ public class ImagesInfo extends AppCompatActivity {
         Button cameraButton = findViewById(R.id.button_camera);
         Button galleryButton = findViewById(R.id.button_gallery);
 
-        // --- Result Launchers ---
+        // --- Result Launchers --- //
         // Handles the result from the camera
-        cameraLauncher = registerForActivityResult(
+        launchCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Bundle extras = result.getData().getExtras();
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         imageView.setImageBitmap(imageBitmap); //-> displays the bitmap captured
-                        // Later, we will convert this bitmap to JSON data
                     }
                 });
 
-    }
+        // Handles the result from the gallery
+        launchGallery = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Uri imageUri = result.getData().getData();
+                        imageView.setImageURI(imageUri); //-> display the selected photo
+                        // Later, we will use this URI to get the image data for JSON
+                    }
+                });
+
+
+
 }
