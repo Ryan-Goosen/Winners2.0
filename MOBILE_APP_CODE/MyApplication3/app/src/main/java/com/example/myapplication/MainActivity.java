@@ -1,9 +1,10 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -20,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
         reportIssueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Button Clicked!", Toast.LENGTH_SHORT).show();
+                Intent switchToImagesInfo = new Intent(MainActivity.this, ImagesInfo.class);
+                startActivity(switchToImagesInfo);
             }
         });
     }
