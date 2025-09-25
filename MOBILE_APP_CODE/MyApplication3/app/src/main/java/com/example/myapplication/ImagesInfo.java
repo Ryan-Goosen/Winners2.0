@@ -31,22 +31,21 @@ import java.util.Locale;
 
 public class ImagesInfo extends AppCompatActivity {
     private ImageView imageView;
-    private String currentPhotoPath;
+    private String currentPhotoPath = "";
     private ActivityResultLauncher<Intent> resultCameraImage;
     private ActivityResultLauncher<Intent> resultGalleryImage;
     private ActivityResultLauncher<String> requestPermission;
     private Uri imageUri;
-    private Bitmap imageBitmap;
     private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_collection);
+        setContentView(R.layout.report_issue);
 
         imageView = findViewById(R.id.imageView);
-        Button cameraButton = findViewById(R.id.button_camera);
-        Button galleryButton = findViewById(R.id.button_gallery);
+        Button cameraButton = findViewById(R.id.take_photo);
+        Button galleryButton = findViewById(R.id.gallery_choice);
         continueButton = findViewById(R.id.continue_button);
 
         // --- Result Launchers --- //
@@ -69,7 +68,6 @@ public class ImagesInfo extends AppCompatActivity {
                         imageUri = result.getData().getData();
                         imageView.setImageURI(imageUri); //-> display the selected photo
                         // We will use this URI to get the image data for JSON
-                        imageBitmap = null;
                         continueButton.setEnabled(true);
                     }
                 });
@@ -111,7 +109,7 @@ public class ImagesInfo extends AppCompatActivity {
     private void launchCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create the file and get its URI
-        File photoFile = null;
+        File photoFile;
         try {
             photoFile = createImageFile(); // A helper method to create a temp file
         } catch (IOException ex) {
@@ -120,18 +118,14 @@ public class ImagesInfo extends AppCompatActivity {
             return;
         }
 
-        if (photoFile != null) {
-            // This is the URI the camera will save the photo to
-            Uri photoURI = FileProvider.getUriForFile(this,
-                    "com.example.package.myapplication", // Change to your app's ID
-                    photoFile);
+        Uri photoURI = FileProvider.getUriForFile(this,
+                "com.example.yourapp.provider", // Change to your authority
+                photoFile);
+        this.imageUri = photoURI;
 
-            // Save the URI so we can use it in the ActivityResult callback
-            this.imageUri = photoURI;
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+        resultCameraImage.launch(cameraIntent);
 
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            resultCameraImage.launch(cameraIntent);
-        }
     }
 
     private void launchGallery() {
@@ -153,6 +147,7 @@ public class ImagesInfo extends AppCompatActivity {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
+        currentPhotoPath = image.getAbsolutePath();
         return image;
     }
 }
