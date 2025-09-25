@@ -22,9 +22,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ImagesInfo extends AppCompatActivity {
     private ImageView imageView;
-    private ActivityResultLauncher<Intent> launchCamera;
-    private ActivityResultLauncher<Intent> launchGallery;
+    private ActivityResultLauncher<Intent> resultCameraImage;
+    private ActivityResultLauncher<Intent> resultGalleryImage;
     private ActivityResultLauncher<String> requestPermission;
+    private Uri imageUri;
+    private Bitmap imageBitmap;
+    private Button continueButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +37,32 @@ public class ImagesInfo extends AppCompatActivity {
         imageView = findViewById(R.id.imageView);
         Button cameraButton = findViewById(R.id.button_camera);
         Button galleryButton = findViewById(R.id.button_gallery);
+        continueButton = findViewById(R.id.continue_button);
 
         // --- Result Launchers --- //
         // Handles the result from the camera
-        launchCamera = registerForActivityResult(
+        resultCameraImage = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Bundle extras = result.getData().getExtras();
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         imageView.setImageBitmap(imageBitmap); //-> displays the bitmap captured
+                        imageUri = null;
+                        continueButton.setEnabled(true);
                     }
                 });
 
         // Handles the result from the gallery
-        launchGallery = registerForActivityResult(
+        resultGalleryImage = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Uri imageUri = result.getData().getData();
                         imageView.setImageURI(imageUri); //-> display the selected photo
-                        // Later, we will use this URI to get the image data for JSON
+                        // We will use this URI to get the image data for JSON
+                        imageBitmap = null;
+                        continueButton.setEnabled(true);
                     }
                 });
 
@@ -73,27 +81,31 @@ public class ImagesInfo extends AppCompatActivity {
 
         // --- Button OnClick Listeners ---
         cameraButton.setOnClickListener(v -> {
-            // Check for camera permission
+            // Check for camera permission & launches
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 launchCamera();
             } else {
-                // Request permission
-                requestPermissionLauncher.launch(Manifest.permission.CAMERA);
+                // Request permission before launching
+                requestPermission.launch(Manifest.permission.CAMERA);
             }
         });
 
         galleryButton.setOnClickListener(v -> launchGallery());
+        continueButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ImagesInfo.this, ComplaintUI.class);
+            // TODO: Here you would pass the image data (URI or Bitmap) to the next activity
+            // Example: if (imageUri != null) intent.setData(imageUri);
+            startActivity(intent);
+        });
     }
+
     private void launchCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraLauncher.launch(cameraIntent);
+        resultCameraImage.launch(cameraIntent);
     }
 
     private void launchGallery() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        galleryLauncher.launch(galleryIntent);
+        resultGalleryImage.launch(galleryIntent);
     }
-
-
-
 }
