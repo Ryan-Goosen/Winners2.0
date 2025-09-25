@@ -58,6 +58,19 @@ public class ImagesInfo extends AppCompatActivity {
                     }
                 });
 
+        // Handles the permission request result
+        requestPermission = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        // Permission granted, launch the camera
+                        launchCamera();
+                    } else {
+                        // Permission denied
+                        Toast.makeText(this, "Camera permission is required to take a picture.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
 
 }
