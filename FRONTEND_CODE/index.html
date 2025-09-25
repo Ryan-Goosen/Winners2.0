@@ -31,19 +31,27 @@
     <nav class="navbar">
       <div class="container-big text-lg">
         <ul>
-          <li>Map View</li>
+          <li data-target="maps">Map View</li>
 
-          <li>Issues</li>
+          <li data-target="issues">Issues</li>
 
-          <li>Analytics</li>
+          <li data-target="analytics">Analytics</li>
 
-          <li class="nav-open">Tickets</li>
+          <li data-target="tickets" class="nav-open">Tickets</li>
         </ul>
       </div>
     </nav>
 
+    <div class="maps nav-item">
+      <h3 class="text-xxl" >MAP</h3>
+    </div>
+
+    <div class="issues nav-item">ISSUES</div>
+    
+    <div class="analytics nav-item">ANALYTICS</div>
+
     <!-- The Ticket Page -->
-    <div class="Tickets">
+    <div class="tickets nav-item show">
       <section class="ticket-status-boxes">
         <div class="container">
           <div class="ticket-status">
@@ -94,5 +102,7 @@
         </div>
       </section>
     </div>
+
+    <script src="js/app.js"></script>
   </body>
 </html>
