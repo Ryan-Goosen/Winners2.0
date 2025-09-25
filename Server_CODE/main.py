@@ -2,16 +2,20 @@
 
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from helper_function import gemi_app_calls
+
 import os
 import json
 from datetime import datetime
 
-from database.database_controller import create_new_ticket
+from database.database_controller import create_new_ticket, get_all_tickets, create_tables_if_not_exist
 
 
 # --- CONFIGURATION + SETUP ---
 UPLOAD_FOLDER = 'images'
-DATABASE_FILE = '/database/database.database'
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DATABASE_DIR = os.path.join(BASE_DIR, 'database')
+DATABASE_FILE = os.path.join(DATABASE_DIR, 'database.db')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -76,9 +80,28 @@ def api_create_ticket():
         return jsonify({"error": f"An internal server error occurred: {e}"}), 500
 
 
+@app.route("/api/tickets", methods=["GET"])
+def api_get_all_tickets():
+    """
+    Returns a list of all tickets with all their related details
+    by joining the data from all four tables.
+    """
+    try:
+        # 1. Call the database controller function to get the list of dictionaries
+        tickets = get_all_tickets(database)
+
+        # 2. Return the data as a JSON response
+        return jsonify(tickets), 200
+
+    except Exception as e:
+        # Log the error and return an appropriate server error message
+        print(f"Error serving GET /api/tickets: {e}")
+        return jsonify({"error": "Failed to retrieve tickets due to an internal server error."}), 500
+
+
 # --- INITIALIZATION ---
 if __name__ == '__main__':
     # Creates the tables defined in models.py if they don't exist
-    with app.app_context():
-        database.create_all()
+    # with app.app_context():
+    #     create_tables_if_not_exist(database)
     app.run(debug=True)

@@ -1,5 +1,4 @@
-from __main__ import database
-
+from .database_initialize import db as database
 
 class Region(database.Model):
     __tablename__ = 'Regions'
@@ -20,6 +19,7 @@ class Ticket(database.Model):
     Priority = database.Column(database.String(50), default='Medium')
     ReportedAt = database.Column(database.String(50))  # Store as ISO string
     EstRepairTime = database.Column(database.Float)
+    Category = database.Column(database.String(2000))
     ImageURL = database.Column(database.String(500))  # Path to the stored file
 
     # Foreign Key
