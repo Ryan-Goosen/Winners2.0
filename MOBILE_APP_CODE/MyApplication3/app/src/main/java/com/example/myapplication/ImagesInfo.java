@@ -71,6 +71,29 @@ public class ImagesInfo extends AppCompatActivity {
                     }
                 });
 
+        // --- Button OnClick Listeners ---
+        cameraButton.setOnClickListener(v -> {
+            // Check for camera permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                launchCamera();
+            } else {
+                // Request permission
+                requestPermissionLauncher.launch(Manifest.permission.CAMERA);
+            }
+        });
+
+        galleryButton.setOnClickListener(v -> launchGallery());
+    }
+    private void launchCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraLauncher.launch(cameraIntent);
+    }
+
+    private void launchGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        galleryLauncher.launch(galleryIntent);
+    }
+
 
 
 }
