@@ -16,3 +16,39 @@ body {
     margin:  0 auto;
     padding: 0 15px;
 }
+
+.text-xxl {
+    font-size: 3rem;
+    line-height: 2;
+    font-weight: normal;
+    margin: 40px 20px;
+}
+
+.text-xl {
+    font-size: 2.4rem;
+    line-height: 2;
+    font-weight: normal;
+    margin: 40px 20px;
+}
+
+.text-lg {
+    font-size: 1.8rem;
+    line-height: 2;
+    font-weight: normal;
+    margin: 30px 20px;
+}
+
+.text-md {
+    font-size: 1.2rem;
+    line-height: 2;
+    font-weight: normal;
+    margin: 25px 10px;
+    
+}
+
+.text-sm {
+    font-size: 0.6rem;
+    line-height: 2;
+    font-weight: normal;
+    margin: 15px 5px;
+}
