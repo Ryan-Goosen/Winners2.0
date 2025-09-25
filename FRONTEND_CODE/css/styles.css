@@ -52,6 +52,7 @@ p {
   width: 25%;
   margin: 0 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 .navbar ul li.nav-open {
@@ -100,6 +101,14 @@ p {
   border: #000 solid 2px ;
   border-radius: 20px;
   display: flex;
+}
+
+.nav-item {
+  display: none;
+}
+
+.show {
+  display: block;
 }
 
 .container-big {
