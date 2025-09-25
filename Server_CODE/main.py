@@ -2,6 +2,8 @@
 
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+
 from helper_function import gemi_app_calls
 
 import os
@@ -22,6 +24,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DATABASE_FILE}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 database = SQLAlchemy(app)
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
