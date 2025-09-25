@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -17,16 +18,24 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            MyApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+//        setContent {
+//            MyApplicationTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+//            }
+//        }
+        setContentView(R.layout.app_layout)
+        val myImageView = findViewById<ImageView>(R.id.imageView2)
+        myImageView.apply {
+
+            setOnClickListener {
+                // Do something when the user taps the image
+                android.util.Log.d("ImageTap", "Image was tapped!")
             }
-        }
     }
 }
 
@@ -44,4 +53,4 @@ fun GreetingPreview() {
     MyApplicationTheme {
         Greeting("Android")
     }
-}
+}}
